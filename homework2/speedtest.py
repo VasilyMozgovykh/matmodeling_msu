@@ -34,7 +34,8 @@ def perform_calculations(
         velocities = np.random.randn(n_objects, 3).astype(dtype=np.float64)
         masses = np.random.randn(n_objects).astype(dtype=np.float64)
     ts_begin = time.time()
-    res = solver(coords, velocities, masses, n_iterations=n_iterations, t_step=0.1)
+    t_step = 60*60*240 if use_solar else 0.1
+    res = solver(coords, velocities, masses, n_iterations=n_iterations, t_step=t_step)
     ts_end = time.time()
     return (ts_end - ts_begin, res)
 
@@ -72,7 +73,9 @@ def plot_avg_time(data: pd.DataFrame) -> None:
     sns.barplot(data, x="n_objects", y="speedup", hue="name")
     ax.set_ylabel("Время работы, сек")
     ax.set_xlabel("Количество тел")
+    ax.set_yscale("log")
     ax.legend(loc="upper right")
+    ax.grid(True)
     fig.savefig(f"visualisation/avg_time_plot.png")
 
 
@@ -82,7 +85,9 @@ def plot_speedup(data: pd.DataFrame) -> None:
     sns.barplot(data, x="n_objects", y="speedup", hue="name")
     ax.set_ylabel("Ускорение, во сколько раз")
     ax.set_xlabel("Количество тел")
+    ax.set_yscale("log")
     ax.legend(loc="upper right")
+    ax.grid(True)
     fig.savefig(f"visualisation/speedup_plot.png")
 
 
