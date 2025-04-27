@@ -9,6 +9,7 @@ from solvers.pure_python import solve_verlet as solve_python
 from solvers.odeint_python import solve_verlet as solve_odeint
 from solvers.numba_python import solve_verlet as solve_numba
 from solvers.cython_python_build.cython_python import solve_verlet as solve_cython
+from solvers.opencl_python import solve_verlet as solve_opencl
 
 from matplotlib.animation import FuncAnimation
 
@@ -17,7 +18,8 @@ SOLVERS = {
     "python": solve_python,
     "odeint": solve_odeint,
     "numba": solve_numba,
-    "cython": solve_cython
+    "cython": solve_cython,
+    "opencl": solve_opencl,
 }
 
 

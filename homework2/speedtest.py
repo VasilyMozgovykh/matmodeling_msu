@@ -8,6 +8,7 @@ from solvers.pure_python import solve_verlet as solve_python
 from solvers.odeint_python import solve_verlet as solve_odeint
 from solvers.numba_python import solve_verlet as solve_numba
 from solvers.cython_python_build.cython_python import solve_verlet as solve_cython
+from solvers.opencl_python import solve_verlet as solve_opencl
 
 from typing import Callable, Dict, List, Tuple
 from tqdm.auto import tqdm
@@ -66,6 +67,7 @@ if __name__ == "__main__":
 
         test_solver(config, "Python", solve_python, N, show_speedup=False)
         test_solver(config, "odeint", solve_odeint, N)
+        test_solver(config, "OpenCL", solve_opencl, N)
         test_solver(config, "Numba", solve_numba, N)
         test_solver(config, "Cython", solve_cython, N)
 
