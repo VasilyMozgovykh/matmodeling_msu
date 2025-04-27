@@ -1,14 +1,21 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
+import seaborn as sns
 import time
 
 from common import get_solar_system_params
 
-from solvers.pure_python import solve_verlet as solve_python
-from solvers.odeint_python import solve_verlet as solve_odeint
-from solvers.numba_python import solve_verlet as solve_numba
-from solvers.cython_python_build.cython_python import solve_verlet as solve_cython
-from solvers.opencl_python import solve_verlet as solve_opencl
+from functools import partial
+
+from solvers import (
+    python_solver,
+    odeint_solver,
+    numba_solver,
+    cython_solver,
+    opencl_solver,
+    multiprocessing_solver,
+)
 
 from typing import Callable, Dict, List, Tuple
 from tqdm.auto import tqdm
@@ -38,7 +45,7 @@ def test_solver(
     solver: Callable,
     n_objects: int = 100,
     n_iterations: int = 100,
-    n_trials: int = 1,
+    n_trials: int = 3,
     show_speedup=True,
 ) -> None:
     print(f"Testing {name} solution...")
@@ -59,24 +66,52 @@ def test_solver(
         print()
 
 
+def plot_avg_time(data: pd.DataFrame) -> None:
+    fig, ax = plt.subplots(constrained_layout=True, figsize=(10, 6))
+    fig.suptitle("Время работы программ в зависимости от числа тел")
+    sns.barplot(data, x="n_objects", y="speedup", hue="name")
+    ax.set_ylabel("Время работы, сек")
+    ax.set_xlabel("Количество тел")
+    ax.legend(loc="upper right")
+    fig.savefig(f"visualisation/avg_time_plot.png")
+
+
+def plot_speedup(data: pd.DataFrame) -> None:
+    fig, ax = plt.subplots(constrained_layout=True, figsize=(10, 6))
+    fig.suptitle("Ускорение работы программ в зависимости от числа тел")
+    sns.barplot(data, x="n_objects", y="speedup", hue="name")
+    ax.set_ylabel("Ускорение, во сколько раз")
+    ax.set_xlabel("Количество тел")
+    ax.legend(loc="upper right")
+    fig.savefig(f"visualisation/speedup_plot.png")
+
+
 if __name__ == "__main__":
     n_iterations = 100
+    n_trials = 3
+    data = {"name": [], "n_objects": [], "avg_time": [], "speedup": []}
     for N in (100, 200, 400):
         config = {}
+        test_fn = partial(test_solver, config=config, n_objects=N, n_trials=n_trials)
         print("======", f"N = {N}", "======")
 
-        test_solver(config, "Python", solve_python, N, show_speedup=False)
-        test_solver(config, "odeint", solve_odeint, N)
-        test_solver(config, "OpenCL", solve_opencl, N)
-        test_solver(config, "Numba", solve_numba, N)
-        test_solver(config, "Cython", solve_cython, N)
+        test_fn(name="Python", solver=python_solver.solve_verlet, show_speedup=False)
+        test_fn(name="Odeint", solver=odeint_solver.solve_verlet)
+        test_fn(name="OpenCL", solver=opencl_solver.solve_verlet)
+        test_fn(name="Cython", solver=cython_solver.solve_verlet)
+        test_fn(name="Numba", solver=numba_solver.solve_verlet)
+        test_fn(name="Multiprocessing", solver=multiprocessing_solver.solve_verlet)
 
         fig, ax = plt.subplots(constrained_layout=True, figsize=(10, 6))
         fig.suptitle("Сравнение относительных погрешностей решения")
 
-        coords_odeint = config["odeint"]["coords"]
+        coords_odeint = config["Odeint"]["coords"]
         for name in config.keys():
-            if name == "odeint":
+            data["name"].append(name)
+            data["n_objects"].append(N)
+            data["avg_time"].append(config[name]["avg_time"])
+            data["speedup"].append(config["Python"]["avg_time"] / config[name]["avg_time"])
+            if name == "Odeint":
                 continue
             coords = config[name]["coords"]
             diff = np.linalg.norm(coords - coords_odeint, axis=(1, 2))
@@ -85,4 +120,6 @@ if __name__ == "__main__":
         ax.legend(loc="upper right")
         ax.grid(True)
         ax.set_yscale("log")
-        fig.savefig(f"comparison_plot_n={N}.png")
+        fig.savefig(f"visualisation/comparison_plot_n={N}.png")
+    plot_avg_time(data)
+    plot_speedup(data)

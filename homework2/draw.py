@@ -5,21 +5,25 @@ import numpy as np
 
 from common import PhysicsEnum, get_solar_system_params
 
-from solvers.pure_python import solve_verlet as solve_python
-from solvers.odeint_python import solve_verlet as solve_odeint
-from solvers.numba_python import solve_verlet as solve_numba
-from solvers.cython_python_build.cython_python import solve_verlet as solve_cython
-from solvers.opencl_python import solve_verlet as solve_opencl
+from solvers import (
+    python_solver,
+    odeint_solver,
+    numba_solver,
+    cython_solver,
+    opencl_solver,
+    multiprocessing_solver,
+)
 
 from matplotlib.animation import FuncAnimation
 
 
 SOLVERS = {
-    "python": solve_python,
-    "odeint": solve_odeint,
-    "numba": solve_numba,
-    "cython": solve_cython,
-    "opencl": solve_opencl,
+    "python": python_solver.solve_verlet,
+    "odeint": odeint_solver.solve_verlet,
+    "numba": numba_solver.solve_verlet,
+    "cython": cython_solver.solve_verlet,
+    "opencl": opencl_solver.solve_verlet,
+    "multiprocessing": multiprocessing_solver.solve_verlet,
 }
 
 

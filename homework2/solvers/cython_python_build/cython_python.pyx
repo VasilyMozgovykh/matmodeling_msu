@@ -4,10 +4,7 @@ import numpy as np
 from cython.view cimport array as cvarray
 
 
-GravityConstant = 6.6743e-11
-AstronomicalUnit = 1.49597870700e11
-EarthMass = 5.9722e24
-SunMass = 1.98892e30
+cdef double GravityConstant = 6.6743e-11
 
 
 @cython.boundscheck(False)
@@ -39,6 +36,10 @@ cdef double[:, :] get_accelerations(double[:, :] coords, double[:] masses):
     cdef Py_ssize_t N = coords.shape[0]
     cdef double[:, :] accelerations = cvarray(shape=(N, 3), itemsize=sizeof(double), format="d")
     cdef double[:] force
+    for i in range(N):
+        accelerations[i, 0] = 0.
+        accelerations[i, 1] = 0.
+        accelerations[i, 2] = 0.
     for i in range(N):
         for j in range(N):
             if i != j:
