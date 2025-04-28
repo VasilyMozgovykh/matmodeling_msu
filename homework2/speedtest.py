@@ -70,7 +70,7 @@ def test_solver(
 def plot_avg_time(data: pd.DataFrame) -> None:
     fig, ax = plt.subplots(constrained_layout=True, figsize=(10, 6))
     fig.suptitle("Время работы программ в зависимости от числа тел")
-    sns.barplot(data, x="n_objects", y="speedup", hue="name")
+    sns.barplot(data, x="n_objects", y="avg_time", hue="name")
     ax.set_ylabel("Время работы, сек")
     ax.set_xlabel("Количество тел")
     ax.set_yscale("log")

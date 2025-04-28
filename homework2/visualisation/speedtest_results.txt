@@ -1,84 +1,84 @@
 ====== N = 100 ======
 Testing Python solution...
-Python average time: 6.601633310317993
+Python average time: 6.729501088460286
 
 Testing Odeint solution...
-Odeint average time: 15.66310715675354
-Odeint speedup: 0.4215 times
+Odeint average time: 2.450974464416504
+Odeint speedup: 2.7456 times
 
 Testing OpenCL solution...
-Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x56501b963790>
-Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x56501b963790>
-Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x56501b963790>
-OpenCL average time: 0.23362215360005698
-Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x56501b963790>
-OpenCL speedup: 28.2577 times
+Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x564efc90eb80>
+Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x564efc90eb80>
+Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x564efc90eb80>
+OpenCL average time: 0.1796229680379232
+Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x564efc90eb80>
+OpenCL speedup: 37.4646 times
 
 Testing Cython solution...
-Cython average time: 0.8959221839904785
-Cython speedup: 7.3685 times
+Cython average time: 0.8824248313903809
+Cython speedup: 7.6261 times
 
 Testing Numba solution...
-Numba average time: 0.2630407015482585
-Numba speedup: 25.0974 times
+Numba average time: 0.2635509173075358
+Numba speedup: 25.5340 times
 
 Testing Multiprocessing solution...
-Multiprocessing average time: 2.2272897561391196
-Multiprocessing speedup: 2.9640 times
+Multiprocessing average time: 2.252247412999471
+Multiprocessing speedup: 2.9879 times
 
 ====== N = 200 ======
 Testing Python solution...
-Python average time: 26.95048451423645
+Python average time: 27.42656636238098
 
 Testing Odeint solution...
-Odeint average time: 9.9437149365743
-Odeint speedup: 2.7103 times
+Odeint average time: 118.02269633611043
+Odeint speedup: 0.2324 times
 
 Testing OpenCL solution...
-Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x56501b963790>
-Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x56501b963790>
-Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x56501b963790>
-OpenCL average time: 0.21216471989949545
-Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x56501b963790>
-OpenCL speedup: 127.0262 times
+Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x564efc90eb80>
+Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x564efc90eb80>
+Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x564efc90eb80>
+OpenCL average time: 0.20182975133260092
+Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x564efc90eb80>
+OpenCL speedup: 135.8896 times
 
 Testing Cython solution...
-Cython average time: 3.575373411178589
-Cython speedup: 7.5378 times
+Cython average time: 3.5684566497802734
+Cython speedup: 7.6858 times
 
 Testing Numba solution...
-Numba average time: 1.05398694674174
-Numba speedup: 25.5700 times
+Numba average time: 1.0457998116811116
+Numba speedup: 26.2254 times
 
 Testing Multiprocessing solution...
-Multiprocessing average time: 7.930386781692505
-Multiprocessing speedup: 3.3984 times
+Multiprocessing average time: 8.001413027445475
+Multiprocessing speedup: 3.4277 times
 
 ====== N = 400 ======
 Testing Python solution...
-Python average time: 107.99167442321777
+Python average time: 110.17661992708842
 
 Testing Odeint solution...
-Odeint average time: 44.74403484662374
-Odeint speedup: 2.4135 times
+Odeint average time: 46.636456886927284
+Odeint speedup: 2.3625 times
 
 Testing OpenCL solution...
-Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x56501b963790>
-Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x56501b963790>
-Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x56501b963790>
-OpenCL average time: 0.23241686820983887
-Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x56501b963790>
-OpenCL speedup: 464.6465 times
+Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x564efc90eb80>
+Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x564efc90eb80>
+Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x564efc90eb80>
+OpenCL average time: 0.2633184591929118
+Choosing only available device: <pyopencl.Device 'pthread-Intel Xeon Processor (Icelake)' on 'Portable Computing Language' at 0x564efc90eb80>
+OpenCL speedup: 418.4159 times
 
 Testing Cython solution...
-Cython average time: 14.536824464797974
-Cython speedup: 7.4288 times
+Cython average time: 14.422423601150513
+Cython speedup: 7.6393 times
 
 Testing Numba solution...
-Numba average time: 4.3143603801727295
-Numba speedup: 25.0307 times
+Numba average time: 4.342973073323567
+Numba speedup: 25.3689 times
 
 Testing Multiprocessing solution...
-Multiprocessing average time: 28.986983060836792
-Multiprocessing speedup: 3.7255 times
+Multiprocessing average time: 29.419679641723633
+Multiprocessing speedup: 3.7450 times
 
