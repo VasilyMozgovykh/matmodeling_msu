@@ -87,7 +87,7 @@ if __name__ == "__main__":
 
     prefix = "solar_system_scaled" if args.use_scale else "solar_system"
     path = "_".join([
-        prefix,
+        f"visualisation/{prefix}",
         f"num_days_for_animation={args.num_days_for_animation}",
         f"num_days_for_frame={args.num_days_for_frame}",
         f"max_tail_size={args.max_tail_size}",
