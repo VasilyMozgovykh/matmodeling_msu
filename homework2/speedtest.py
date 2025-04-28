@@ -70,31 +70,40 @@ def test_solver(
 def plot_avg_time(data: pd.DataFrame) -> None:
     fig, ax = plt.subplots(constrained_layout=True, figsize=(10, 6))
     fig.suptitle("Время работы программ в зависимости от числа тел")
-    sns.barplot(data, x="n_objects", y="avg_time", hue="name")
+    sns.lineplot(data, x="n_objects", y="avg_time", hue="name")
     ax.set_ylabel("Время работы, сек")
     ax.set_xlabel("Количество тел")
-    ax.set_yscale("log")
     ax.legend(loc="upper right")
     ax.grid(True)
-    fig.savefig(f"visualisation/avg_time_plot.png")
+    fig.savefig(f"visualisation_wo_opencl/avg_time_plot.png")
 
 
 def plot_speedup(data: pd.DataFrame) -> None:
     fig, ax = plt.subplots(constrained_layout=True, figsize=(10, 6))
     fig.suptitle("Ускорение работы программ в зависимости от числа тел")
-    sns.barplot(data, x="n_objects", y="speedup", hue="name")
+    sns.lineplot(data, x="n_objects", y="speedup", hue="name")
     ax.set_ylabel("Ускорение, во сколько раз")
     ax.set_xlabel("Количество тел")
-    ax.set_yscale("log")
     ax.legend(loc="upper right")
     ax.grid(True)
-    fig.savefig(f"visualisation/speedup_plot.png")
+    fig.savefig(f"visualisation_wo_opencl/speedup_plot.png")
+
+
+def plot_rel_diff(data: pd.DataFrame) -> None:
+    fig, ax = plt.subplots(constrained_layout=True, figsize=(10, 6))
+    fig.suptitle("Относительная погрешность в сравнении с Odeint")
+    sns.lineplot(data, x="n_objects", y="rel_diff", hue="name")
+    ax.set_ylabel("Относительная погрешность в евклидовой норме")
+    ax.set_xlabel("Количество тел")
+    ax.legend(loc="upper right")
+    ax.grid(True)
+    fig.savefig(f"visualisation_wo_opencl/rel_diff_plot.png")
 
 
 if __name__ == "__main__":
     n_iterations = 100
     n_trials = 3
-    data = {"name": [], "n_objects": [], "avg_time": [], "speedup": []}
+    data = {"name": [], "n_objects": [], "avg_time": [], "speedup": [], "rel_diff": []}
     for N in (100, 200, 400):
         config = {}
         test_fn = partial(test_solver, config=config, n_objects=N, n_trials=n_trials)
@@ -102,7 +111,7 @@ if __name__ == "__main__":
 
         test_fn(name="Python", solver=python_solver.solve_verlet, show_speedup=False)
         test_fn(name="Odeint", solver=odeint_solver.solve_verlet)
-        test_fn(name="OpenCL", solver=opencl_solver.solve_verlet)
+        # test_fn(name="OpenCL", solver=opencl_solver.solve_verlet)
         test_fn(name="Cython", solver=cython_solver.solve_verlet)
         test_fn(name="Numba", solver=numba_solver.solve_verlet)
         test_fn(name="Multiprocessing", solver=multiprocessing_solver.solve_verlet)
@@ -117,14 +126,17 @@ if __name__ == "__main__":
             data["avg_time"].append(config[name]["avg_time"])
             data["speedup"].append(config["Python"]["avg_time"] / config[name]["avg_time"])
             if name == "Odeint":
+                data["rel_diff"].append(None)
                 continue
             coords = config[name]["coords"]
             diff = np.linalg.norm(coords - coords_odeint, axis=(1, 2))
             rel_diff = diff / np.linalg.norm(coords_odeint, axis=(1, 2))
+            data["rel_diff"].append(rel_diff)
             ax.plot(range(n_iterations), rel_diff, label=name)
         ax.legend(loc="upper right")
         ax.grid(True)
         ax.set_yscale("log")
-        fig.savefig(f"visualisation/comparison_plot_n={N}.png")
+        fig.savefig(f"visualisation_wo_opencl/comparison_plot_n={N}.png")
     plot_avg_time(data)
     plot_speedup(data)
+    plot_rel_diff(data)

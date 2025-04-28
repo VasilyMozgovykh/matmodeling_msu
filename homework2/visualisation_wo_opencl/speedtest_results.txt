@@ -1,0 +1,60 @@
+====== N = 100 ======
+Testing Python solution...
+Python average time: 6.6637983322143555
+
+Testing Odeint solution...
+Odeint average time: 2.4715819358825684
+Odeint speedup: 2.6962 times
+
+Testing Cython solution...
+Cython average time: 0.8863193194071451
+Cython speedup: 7.5185 times
+
+Testing Numba solution...
+Numba average time: 0.2698417504628499
+Numba speedup: 24.6952 times
+
+Testing Multiprocessing solution...
+Multiprocessing average time: 2.232158660888672
+Multiprocessing speedup: 2.9854 times
+
+====== N = 200 ======
+Testing Python solution...
+Python average time: 26.705841700236004
+
+Testing Odeint solution...
+Odeint average time: 10.356505314509073
+Odeint speedup: 2.5787 times
+
+Testing Cython solution...
+Cython average time: 3.647277514139811
+Cython speedup: 7.3221 times
+
+Testing Numba solution...
+Numba average time: 1.0417197545369465
+Numba speedup: 25.6363 times
+
+Testing Multiprocessing solution...
+Multiprocessing average time: 7.917795658111572
+Multiprocessing speedup: 3.3729 times
+
+====== N = 400 ======
+Testing Python solution...
+Python average time: 107.38072935740153
+
+Testing Odeint solution...
+Odeint average time: 41.38089466094971
+Odeint speedup: 2.5949 times
+
+Testing Cython solution...
+Cython average time: 14.511168877283732
+Cython speedup: 7.3999 times
+
+Testing Numba solution...
+Numba average time: 4.266342957814534
+Numba speedup: 25.1693 times
+
+Testing Multiprocessing solution...
+Multiprocessing average time: 28.99222469329834
+Multiprocessing speedup: 3.7038 times
+
